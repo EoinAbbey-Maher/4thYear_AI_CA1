@@ -5,17 +5,16 @@
 
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_roombuilder{m_window},
 	m_exitGame{false} //when true game will exit
 {
-	
+	m_roombuilder.loadFile("Assets\\testLevel.txt");
 }
 
 
 Game::~Game()
 {
 }
-
-
 
 void Game::run()
 {	
@@ -53,7 +52,6 @@ void Game::processEvents()
 	}
 }
 
-
 void Game::processKeys(sf::Event t_event)
 {
 	if (sf::Keyboard::Escape == t_event.key.code)
@@ -61,7 +59,6 @@ void Game::processKeys(sf::Event t_event)
 		m_exitGame = true;
 	}
 }
-
 
 void Game::update(sf::Time t_deltaTime)
 {
@@ -71,9 +68,9 @@ void Game::update(sf::Time t_deltaTime)
 	}
 }
 
-
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
+	m_roombuilder.render();
 	m_window.display();
 }
