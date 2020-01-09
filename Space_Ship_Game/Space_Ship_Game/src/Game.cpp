@@ -7,7 +7,7 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
 	m_exitGame{false} //when true game will exit
 {
-	
+	setupSprite();
 }
 
 
@@ -69,11 +69,37 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	movement();
 }
 
 
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
+	
+	//m_window.draw(workers.m_WorkerSprite);
+	
+	
 	m_window.display();
+}
+
+void Game::movement()
+{
+	
+		//workers.workerMove();
+		//workers.wander();
+	
+}
+
+void Game::setupFontAndText()
+{
+}
+
+void Game::setupSprite()
+{
+	
+		//workers.setUpAssets();
+		//workers.worker(rand()%750, rand() % 750);
+	
+	
 }
