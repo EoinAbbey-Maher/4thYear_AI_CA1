@@ -33,7 +33,7 @@ private: //functions
 
 public: //variables
 	std::map<std::string,sf::Texture*> m_textureDict;
-	int const M_SIZE{ 64 };
+	int const M_SIZE{ 32};
 
 private: //variables 
 	TileType m_type;

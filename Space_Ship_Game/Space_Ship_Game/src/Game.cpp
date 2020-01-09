@@ -4,11 +4,11 @@
 
 
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ 1344, 1344, 32U }, "SFML Game" },
 	m_roombuilder{m_window},
 	m_exitGame{false} //when true game will exit
 {
-	m_roombuilder.loadFile("Assets\\testLevel.txt");
+	m_roombuilder.loadFile("Assets\\Level.txt");
 }
 
 
@@ -70,7 +70,7 @@ void Game::update(sf::Time t_deltaTime)
 
 void Game::render()
 {
-	m_window.clear(sf::Color::White);
+	m_window.clear(sf::Color::Black);
 	m_roombuilder.render();
 	m_window.display();
 }

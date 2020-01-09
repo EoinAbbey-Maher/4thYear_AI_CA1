@@ -44,6 +44,9 @@
     <ClCompile Include="src\RoomBuilder.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="ASSETS\Level.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{cf1161da-9e93-4ec9-8f3b-01a4e84644da}</ProjectGuid>

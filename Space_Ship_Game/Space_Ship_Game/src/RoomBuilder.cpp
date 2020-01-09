@@ -85,12 +85,12 @@ void RoomBuilder::emptyRoom()
 /// </summary>
 void RoomBuilder::loadAssets()
 {
-	if (floor1.loadFromFile("Assets\\Sprites\\Floor1.png")) { std::cout << "loaded"; }
-	if (floor2.loadFromFile("Assets\\Sprites\\Floor2.png")) { std::cout << "loaded"; }
-	if (wall1.loadFromFile("Assets\\Sprites\\Wall1.png")) { std::cout << "loaded"; }
-	if (wall2.loadFromFile("Assets\\Sprites\\wall2.png")) { std::cout << "loaded"; }
-	if (door1.loadFromFile("Assets\\Sprites\\DoorClosed.png")) { std::cout << "loaded"; }
-	if (door2.loadFromFile("Assets\\Sprites\\DoorOpen.png")) { std::cout << "loaded"; }
+	if (floor1.loadFromFile("Assets\\IMAGES\\Floor1.png")) { std::cout << "loaded"; }
+	if (floor2.loadFromFile("Assets\\IMAGES\\Floor2.png")) { std::cout << "loaded"; }
+	if (wall1.loadFromFile("Assets\\IMAGES\\wall1.png")) { std::cout << "loaded"; }
+	if (wall2.loadFromFile("Assets\\IMAGES\\wall2.png")) { std::cout << "loaded"; }
+	if (door1.loadFromFile("Assets\\IMAGES\\DoorClosed.png")) { std::cout << "loaded"; }
+	if (door2.loadFromFile("Assets\\IMAGES\\DoorOpen.png")) { std::cout << "loaded"; }
 
 } // !loadAssets
 

@@ -21,8 +21,8 @@ private: // functions
 
 public: // variables
 
-	static const int M_TOTALHEIGHT = 10;
-	static const int M_TOTALWIDTH = 16;
+	static const int M_TOTALHEIGHT = 42;
+	static const int M_TOTALWIDTH = 42;
 
 	
 private: //variables
