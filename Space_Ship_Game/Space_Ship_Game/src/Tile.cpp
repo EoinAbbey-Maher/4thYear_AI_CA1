@@ -8,23 +8,21 @@ Tile::~Tile()
 {
 }
 
-void Tile::init(sf::Vector2f t_pos, sf::Texture * t_floor1, sf::Texture * t_floor2, sf::Texture * t_wall1, sf::Texture * t_wall2, sf::Texture * t_doorOpen, sf::Texture * t_doorClosed)
+void Tile::init(sf::Vector2f t_pos, sf::Texture * t_floor1, sf::Texture * t_floor2, sf::Texture * t_wall1, sf::Texture * t_wall2, sf::Texture * t_doorOpen, sf::Texture * t_starTile)
 {
 	m_textureDict["floor_1"] = t_floor1;
 	m_textureDict["floor_2"] = t_floor2;
 	m_textureDict["wall_1"] = t_wall1;
 	m_textureDict["wall_2"] = t_wall2;
 	m_textureDict["door_open"] = t_doorOpen;
-	m_textureDict["door_close"] = t_doorClosed;
+	m_textureDict["star_tile"] = t_starTile;
 
 	m_bodySquare.setPosition(m_position);
 	m_bodySquare.setSize(sf::Vector2f(M_SIZE, M_SIZE));
-
 }
 
 void Tile::setTexture(TileType t_type, const int T_XPOS, const int T_YPOS)
 {
-
 	int randomNum;
 	randomNum = std::rand() % 2;
 	switch (t_type)
@@ -61,12 +59,12 @@ void Tile::setTexture(TileType t_type, const int T_XPOS, const int T_YPOS)
 		case 0:
 			m_bodySquare.setTexture(m_textureDict["door_open"]);
 			break;
-		case 1:
-			m_bodySquare.setTexture(m_textureDict["door_close"]);
-			break;
 		default:
 			break;
 		} // !DOOR
+		break;
+	case TileType::EMPTY:
+		m_bodySquare.setTexture(m_textureDict["star_tile"]);
 		break;
 	default:
 		break;
