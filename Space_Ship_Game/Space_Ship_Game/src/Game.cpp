@@ -8,6 +8,7 @@ Game::Game() :
 	m_exitGame{false} //when true game will exit
 {
 	setupSprite();
+	populateVector(workers);
 }
 
 
@@ -37,6 +38,45 @@ void Game::run()
 	}
 }
 
+int Game::getSize()
+{
+	return workers.size();
+}
+
+Worker Game::getWorker(int i)
+{
+	return workers[i];
+}
+
+void Game::addWorker(Worker w)
+{
+	workers.push_back(w);
+}
+
+void Game::wandering()
+{
+	for (int i = 0; i < workers.size(); i++)
+	{
+		workers[i].run(workers);
+	}
+}
+
+void Game::populateVector(std::vector<Worker>& workers)
+{
+	float x;
+	float y;
+	
+	for (int i = 0; i< noOfWorkers;i++)
+	{ 
+		x = rand() % 750;
+		y = rand() % 750;
+		
+		Worker newWorker(x, y);
+
+		workers.push_back(newWorker);
+	}
+}
+
 void Game::processEvents()
 {
 	sf::Event newEvent;
@@ -51,6 +91,7 @@ void Game::processEvents()
 			processKeys(newEvent);
 		}
 	}
+	
 }
 
 
@@ -77,18 +118,23 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	
-	//m_window.draw(workers.m_WorkerSprite);
-	
+
+	for (int i = 0; i < noOfWorkers; i++)
+	{
+		m_window.draw(workers[i].m_WorkerSprite);
+
+	}
 	
 	m_window.display();
 }
 
 void Game::movement()
 {
-	
-		//workers.workerMove();
-		//workers.wander();
-	
+	for (int i = 0; i < noOfWorkers; i++)
+	{
+		workers[i].workerMove();
+		workers[i].wander();
+	}
 }
 
 void Game::setupFontAndText()
@@ -97,9 +143,5 @@ void Game::setupFontAndText()
 
 void Game::setupSprite()
 {
-	
-		//workers.setUpAssets();
-		//workers.worker(rand()%750, rand() % 750);
-	
 	
 }
