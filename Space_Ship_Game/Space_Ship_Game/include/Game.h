@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <RoomBuilder.h>
 
 class Game
 {
@@ -17,8 +18,7 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupFontAndText();
-	void setupSprite();
+	RoomBuilder m_roombuilder;
 
 	sf::RenderWindow m_window; // main SFML window
 
