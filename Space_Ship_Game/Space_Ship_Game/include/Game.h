@@ -12,20 +12,19 @@ public:
 	~Game();
 	void run();
 	
-	std::vector<Worker> workers;
-	int getSize();
-	Worker getWorker(int i);
-	void addWorker(Worker w);
-	void wandering();
+	
+	
 
 private:
 
-	void populateVector(std::vector<Worker>& workers);
+	std::vector<Worker*> m_workers;
+	std::vector<sf::Vector2f*> m_workersPositions;
+	void setUpWorkers();
 	void processEvents();
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
-	void movement();
+	
 	
 	void setupFontAndText();
 	void setupSprite();
