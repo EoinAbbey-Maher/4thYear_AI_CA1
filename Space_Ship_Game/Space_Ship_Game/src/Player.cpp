@@ -94,6 +94,7 @@ void Player::turn(float t_accel)
 
 void Player::checkBoundaries(RoomBuilder& t_roombuilder)
 {
+
 	for each (Tile &tile in t_roombuilder.m_tiles)
 	{
 		if (m_bodyShape.getGlobalBounds().intersects(tile.m_bodySquare.getGlobalBounds()) && tile.m_type == TileType::WALL)

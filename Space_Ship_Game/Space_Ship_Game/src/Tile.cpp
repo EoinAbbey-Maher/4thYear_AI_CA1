@@ -40,6 +40,7 @@ void Tile::setTexture(TileType t_type, const int T_XPOS, const int T_YPOS)
 			break;
 		} // !case FLOOR
 		break;
+		m_type = t_type;
 	case TileType::WALL:
 		switch (randomNum)
 		{
@@ -52,6 +53,7 @@ void Tile::setTexture(TileType t_type, const int T_XPOS, const int T_YPOS)
 		default:
 			break;
 		} // !case WALL
+		m_type = t_type;
 		break;
 	case TileType::DOOR:
 		switch (randomNum)
@@ -62,9 +64,11 @@ void Tile::setTexture(TileType t_type, const int T_XPOS, const int T_YPOS)
 		default:
 			break;
 		} // !DOOR
+		m_type = t_type;
 		break;
 	case TileType::EMPTY:
 		m_bodySquare.setTexture(m_textureDict["star_tile"]);
+		m_type = t_type;
 		break;
 	default:
 		break;
