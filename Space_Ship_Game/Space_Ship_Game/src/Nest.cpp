@@ -10,9 +10,7 @@ Nest::Nest():
 
 void Nest::rotate()
 {
-	
 	m_nestSprite.rotate(rotateSpeed);
-	
 }
 
 void Nest::render(sf::RenderWindow& t_window)
@@ -20,12 +18,14 @@ void Nest::render(sf::RenderWindow& t_window)
 	t_window.draw(m_nestSprite);
 }
 
-void Nest::shootMissile()
+void Nest::shootMissile(Missile m_missile, sf::RenderWindow& t_window)
 {
+	m_missile.render(t_window);
 }
 
 void Nest::deployPredators()
 {
+
 }
 
 void Nest::setSprite()
