@@ -9,6 +9,8 @@ Game::Game() :
 	m_exitGame{false} //when true game will exit
 {
 	m_roombuilder.loadFile("Assets\\Level.txt");
+	setUpNests();
+	setupSprite();
 }
 
 
@@ -33,6 +35,17 @@ void Game::run()
 			update(timePerFrame); //60 fps
 		}
 		render(); // as many as possible
+	}
+}
+
+void Game::setUpNests()
+{
+	m_nests.reserve(noOfNests);
+	m_nestsPositions.reserve(m_nests.capacity());
+	for (int i = 0; i < m_nests.capacity(); i++)
+	{
+		m_nests.push_back(new Nest());
+		m_nestsPositions.push_back(&m_nests[i]->getPosition());
 	}
 }
 
@@ -66,11 +79,27 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	for (int i = 0; i < m_nests.size(); i++)
+	{
+		m_nests[i]->rotate();
+	}
 }
 
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
 	m_roombuilder.render();
+	for (Nest* nest : m_nests)
+	{
+		nest->render(m_window);
+	}
 	m_window.display();
+}
+
+void Game::setupSprite()
+{
+	for (int i = 0; i < m_nests.size(); i++)
+	{
+		m_nests[i]->setSprite();
+	}
 }
