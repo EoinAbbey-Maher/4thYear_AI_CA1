@@ -29,7 +29,7 @@ public: //Functions
 public : //Variables
 	sf::Vector2f m_position{ 500,500};
 	sf::Vector2f m_lastPosition;
-	sf::Vector2f m_size{ 40,29 };
+	sf::Vector2f m_size{ 37,25 };
 	sf::Vector2f m_velocity{ 1,10 };
 	
 	float m_orientation{ 90 };

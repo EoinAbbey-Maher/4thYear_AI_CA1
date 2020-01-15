@@ -38,6 +38,8 @@ private: //Variables
 	sf::Texture m_mapFrame;
 	sf::RectangleShape m_mapShape;
 
+	sf::Texture m_sweeperTexture;
+
 	bool m_exitGame; // control exiting game
 
 };

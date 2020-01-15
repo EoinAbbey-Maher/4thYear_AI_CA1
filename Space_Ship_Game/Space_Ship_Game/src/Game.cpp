@@ -27,6 +27,8 @@ Game::Game() :
 	m_playerCircle.setFillColor(sf::Color::Green);
 	m_playerCircle.setPosition(m_player.m_position);
 	m_playerCircle.setOrigin(m_playerCircle.getRadius(), m_playerCircle.getRadius());
+
+	m_sweeperTexture.loadFromFile("ASSETS\\IMAGES\\SweeperBot.png");
 }
 
 Game::~Game()
