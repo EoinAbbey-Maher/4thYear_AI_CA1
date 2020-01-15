@@ -47,6 +47,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Missile.h">
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sweeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -67,6 +71,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Missile.cpp">
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sweeper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

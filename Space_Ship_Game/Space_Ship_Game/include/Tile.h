@@ -7,7 +7,8 @@ enum class TileType
 {
 	FLOOR,
 	WALL,
-	DOOR
+	DOOR,
+	EMPTY
 };
 
 class Tile
@@ -33,12 +34,14 @@ private: //functions
 
 public: //variables
 	std::map<std::string,sf::Texture*> m_textureDict;
-	int const M_SIZE{ 32};
+	int const M_SIZE{ 26};
+	sf::RectangleShape m_bodySquare;
+	TileType m_type;
 
 private: //variables 
-	TileType m_type;
+	
 	sf::IntRect m_textureRect;
-	sf::RectangleShape m_bodySquare;
+	
 	sf::Vector2f m_position{ 0,0 };
 };
 
