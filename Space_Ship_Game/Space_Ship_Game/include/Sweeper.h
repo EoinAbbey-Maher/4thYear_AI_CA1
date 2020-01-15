@@ -22,7 +22,10 @@ public: // variables
 
 
 private: // functions
-	
+	void checkCollisions(RoomBuilder& t_builder);
+	void wander();
+	void searchForPlayerWorker();
+	void fleeFromPlayer();
 
 private: // variables
 	sf::Vector2f m_position;

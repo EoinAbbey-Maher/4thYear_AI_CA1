@@ -31,7 +31,11 @@ Game::Game() :
 	m_playerCircle.setPosition(m_player.m_position);
 	m_playerCircle.setOrigin(m_playerCircle.getRadius(), m_playerCircle.getRadius());
 
-	m_sweeperTexture.loadFromFile("ASSETS\\IMAGES\\SweeperBot.png");
+	
+	if (m_sweeperTexture.loadFromFile("ASSETS\\IMAGES\\SweeperBot.png"))
+	{
+		setupSweepers();
+	}
 }
 
 Game::~Game()
@@ -135,5 +139,13 @@ void Game::setupSprite()
 	for (int i = 0; i < m_nests.size(); i++)
 	{
 		m_nests[i]->setSprite();
+	}
+}
+
+void Game::setupSweepers()
+{
+	for (int i )
+	{
+
 	}
 }
