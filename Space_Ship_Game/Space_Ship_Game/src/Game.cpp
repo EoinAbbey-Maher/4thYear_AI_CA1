@@ -104,8 +104,10 @@ void Game::update(sf::Time t_deltaTime)
 	}
 	for (int i = 0; i < m_nests.size(); i++)
 	{
+		m_nests[i]->checkPosition(m_roombuilder);
 		m_nests[i]->rotate();
 	}
+	
 	m_playerView.setCenter(m_player.m_position);
 	m_playerCircle.setPosition(m_player.m_position);
 	m_player.update(t_deltaTime, m_roombuilder);
@@ -117,6 +119,10 @@ void Game::render()
 	m_window.setView(m_playerView);
 	m_roombuilder.render();
 	m_player.render();
+	for (Nest* nest : m_nests)
+	{
+		nest->render(m_window);
+	}
 
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
@@ -126,7 +132,6 @@ void Game::render()
 	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
-	
 	m_window.display();
 }
 
