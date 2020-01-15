@@ -9,7 +9,7 @@ RoomBuilder::RoomBuilder(sf::RenderWindow & t_window) :
 	{
 		for (int j = 0; j  < M_TOTALWIDTH; j++)
 		{			
-			m_tiles[i][j].init(sf::Vector2f(0, 0),&floor1, &floor2, &wall1, &wall2, &door1, &door2);						
+			m_tiles[i][j].init(sf::Vector2f(0, 0),&floor1, &floor2, &wall1, &wall2, &door1, &star);						
 		} // !for j
 		
 	} // !for i
@@ -90,7 +90,7 @@ void RoomBuilder::loadAssets()
 	if (wall1.loadFromFile("Assets\\IMAGES\\wall1.png")) { std::cout << "loaded"; }
 	if (wall2.loadFromFile("Assets\\IMAGES\\wall2.png")) { std::cout << "loaded"; }
 	if (door1.loadFromFile("Assets\\IMAGES\\DoorClosed.png")) { std::cout << "loaded"; }
-	if (door2.loadFromFile("Assets\\IMAGES\\DoorOpen.png")) { std::cout << "loaded"; }
+	if (star.loadFromFile("Assets\\IMAGES\\star.png")) { std::cout << "loaded"; }
 
 } // !loadAssets
 

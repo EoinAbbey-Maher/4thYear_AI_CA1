@@ -43,6 +43,12 @@
     <ClInclude Include="include\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sweeper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -55,6 +61,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sweeper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -35,13 +35,17 @@
   <ItemGroup>
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Global.h" />
+    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\RoomBuilder.h" />
+    <ClInclude Include="include\Sweeper.h" />
     <ClInclude Include="include\Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RoomBuilder.cpp" />
+    <ClCompile Include="src\Sweeper.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
