@@ -18,9 +18,15 @@ void Nest::render(sf::RenderWindow& t_window)
 	t_window.draw(m_nestSprite);
 }
 
-void Nest::shootMissile(Missile m_missile, sf::RenderWindow& t_window)
+void Nest::shootMissile(sf::RenderWindow& t_window)
 {
+	
 	m_missile.render(t_window);
+}
+
+void Nest::radiusCheck()
+{
+	m_missile.seek();
 }
 
 void Nest::deployPredators()

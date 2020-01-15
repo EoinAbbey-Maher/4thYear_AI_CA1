@@ -10,10 +10,8 @@ Missile::Missile() :
 
 void Missile::seek()
 {
-	if (m_alive = true)
-	{
+	
 
-	}
 }
 
 void Missile::render(sf::RenderWindow& t_window)
