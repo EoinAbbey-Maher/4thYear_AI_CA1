@@ -3,6 +3,8 @@
 
 //SDKs
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <Nest.h>
 
 //User Files
 #include "RoomBuilder.h"
@@ -17,18 +19,25 @@ public:
 
 public: //Variables
 
-
+	std::vector<Nest*> m_nests;
+	std::vector<sf::Vector2f*> m_nestsPositions;
+	void setUpNests();
+	
 private: //Functions
 	void processEvents();
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
+	
+	void setupSprite();
+	RoomBuilder m_roombuilder;
+
+	int noOfNests{ 2 };
 
 private: //Variables
 
 	Player m_player;
-	RoomBuilder m_roombuilder;
-
+	
 	sf::View m_playerView;
 	sf::View m_miniMapView;
 	sf::RenderWindow m_window; // main SFML window

@@ -9,6 +9,9 @@ Game::Game() :
 	m_player{m_window}
 {
 	m_roombuilder.loadFile("Assets\\Level.txt");
+	setUpNests();
+	setupSprite();
+
 	m_playerView.setCenter(m_player.m_position);
 	m_playerView.setSize(150, 150);
 	m_playerView.setViewport(sf::FloatRect(0, 0, 1, 1));
@@ -55,6 +58,17 @@ void Game::run()
 	}
 }
 
+void Game::setUpNests()
+{
+	m_nests.reserve(noOfNests);
+	m_nestsPositions.reserve(m_nests.capacity());
+	for (int i = 0; i < m_nests.capacity(); i++)
+	{
+		m_nests.push_back(new Nest());
+		m_nestsPositions.push_back(&m_nests[i]->getPosition());
+	}
+}
+
 void Game::processEvents()
 {
 	sf::Event newEvent;
@@ -88,6 +102,10 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	for (int i = 0; i < m_nests.size(); i++)
+	{
+		m_nests[i]->rotate();
+	}
 	m_playerView.setCenter(m_player.m_position);
 	m_playerCircle.setPosition(m_player.m_position);
 	m_player.update(t_deltaTime, m_roombuilder);
@@ -102,8 +120,20 @@ void Game::render()
 
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
+	for (Nest* nest : m_nests)
+	{
+		nest->render(m_window);
+	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
 	
 	m_window.display();
+}
+
+void Game::setupSprite()
+{
+	for (int i = 0; i < m_nests.size(); i++)
+	{
+		m_nests[i]->setSprite();
+	}
 }
