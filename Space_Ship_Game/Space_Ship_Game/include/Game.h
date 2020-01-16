@@ -4,10 +4,12 @@
 //SDKs
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <Nest.h>
+
 
 //User Files
+#include <Nest.h>
 #include "RoomBuilder.h"
+#include "Sweeper.h"
 #include "Player.h"
 
 class Game
@@ -22,6 +24,11 @@ public: //Variables
 	std::vector<Nest*> m_nests;
 	std::vector<sf::Vector2f*> m_nestsPositions;
 	void setUpNests();
+
+	sf::Vector2i getNewPosition();
+
+	int noOfNests{ 2 };
+	const int NOOFSWEEPERS{ 6 };
 	
 private: //Functions
 	void processEvents();
@@ -32,7 +39,8 @@ private: //Functions
 	void setupSprite();
 	RoomBuilder m_roombuilder;
 
-	int noOfNests{ 2 };
+	void setupSweepers();
+
 
 private: //Variables
 
@@ -48,9 +56,10 @@ private: //Variables
 	sf::RectangleShape m_mapShape;
 
 	sf::Texture m_sweeperTexture;
+	std::vector<Sweeper> m_sweepers;
+
 
 	bool m_exitGame; // control exiting game
-
 };
 
 #endif // !GAME_HPP
