@@ -64,7 +64,7 @@ void Game::setUpNests()
 	m_nestsPositions.reserve(m_nests.capacity());
 	for (int i = 0; i < m_nests.capacity(); i++)
 	{
-		m_nests.push_back(new Nest());
+		m_nests.push_back(new Nest(m_window));
 		m_nestsPositions.push_back(&m_nests[i]->getPosition());
 	}
 }
@@ -106,6 +106,7 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_nests[i]->checkPosition(m_roombuilder);
 		m_nests[i]->rotate();
+		
 	}
 	
 	m_playerView.setCenter(m_player.m_position);
@@ -121,14 +122,14 @@ void Game::render()
 	m_player.render();
 	for (Nest* nest : m_nests)
 	{
-		nest->render(m_window);
+		nest->render();
 	}
-
+	
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
 	for (Nest* nest : m_nests)
 	{
-		nest->render(m_window);
+		nest->render();
 	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
@@ -139,6 +140,6 @@ void Game::setupSprite()
 {
 	for (int i = 0; i < m_nests.size(); i++)
 	{
-		m_nests[i]->setSprite();
+		m_nests[i]->setBody();
 	}
 }

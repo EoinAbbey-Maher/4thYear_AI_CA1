@@ -5,7 +5,7 @@ Nest::Nest(sf::RenderWindow& t_window):
 	m_missileFired{ false },
 	m_window(t_window)
 {
-	setSprite();
+	setBody();
 }
 
 Nest::~Nest()
@@ -14,28 +14,29 @@ Nest::~Nest()
 
 void Nest::rotate()
 {
-	m_nestSprite.rotate(rotateSpeed);
+	m_nestShape.rotate(rotateSpeed);
 }
 
-void Nest::render(sf::RenderWindow& t_window)
+void Nest::render()
 {
-	t_window.draw(m_nestSprite);
+	m_window.draw(m_nestShape);
 }
 
 void Nest::shootMissile(sf::RenderWindow& t_window)
 {
-	
-	//m_missile.render(t_window);
-	//m_missile.seek();
+	m_missile.render(t_window);
+	m_missile.seek(m_player.m_position);
 }
 
 void Nest::checkPosition(RoomBuilder& t_roombuilder)
 {
 	for each (Tile & tile in t_roombuilder.m_tiles)
 	{
-		if (m_nestSprite.getGlobalBounds().intersects(tile.m_bodySquare.getGlobalBounds())&& tile.m_type == TileType::WALL)
+
+		
+		if (m_nestShape.getGlobalBounds().intersects(tile.m_bodySquare.getGlobalBounds())&& tile.m_type == TileType::WALL)
 		{
-			setSprite();
+			m_nestPosition = { m_random,m_random };
 		}
 	}
 }
@@ -50,16 +51,18 @@ void Nest::deployPredators()
 
 }
 
-void Nest::setSprite()
+void Nest::setBody()
 {
-	if (!m_nestTexture.loadFromFile("ASSETS\\IMAGES\\nest.png"))
+	if (m_nestTexture.loadFromFile("ASSETS\\IMAGES\\nest.png"))
 	{
-		std::cout << "problem loading nest" << std::endl;
+		//std::cout << "loading nest" << std::endl;
+		m_nestShape.setTexture(&m_nestTexture);
 	}
-	m_nestSprite.setTexture(m_nestTexture);
-	m_nestSprite.setScale(0.7f,0.7f);
-	m_nestSprite.setOrigin(m_nestTexture.getSize().x / 2, m_nestTexture.getSize().y / 2);
-	m_nestPosition = { static_cast <float>(rand() % GlobalSettings::s_width),static_cast <float>(rand() % GlobalSettings::s_width) };
-	m_nestSprite.setPosition(m_nestPosition);
+
+	m_nestPosition = { m_random,m_random};
+	m_nestShape.setPosition(m_nestPosition);
+	m_nestShape.setSize(m_size);
+	m_nestShape.setOrigin(m_size.x * .5, m_size.y* .5);
+	
 
 }
