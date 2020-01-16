@@ -89,7 +89,6 @@ void RoomBuilder::loadAssets()
 	if (floor2.loadFromFile("Assets\\IMAGES\\Floor2.png")) { std::cout << "loaded"; }
 	if (wall1.loadFromFile("Assets\\IMAGES\\wall1.png")) { std::cout << "loaded"; }
 	if (wall2.loadFromFile("Assets\\IMAGES\\wall2.png")) { std::cout << "loaded"; }
-	if (door1.loadFromFile("Assets\\IMAGES\\DoorClosed.png")) { std::cout << "loaded"; }
 	if (star.loadFromFile("Assets\\IMAGES\\star.png")) { std::cout << "loaded"; }
 
 } // !loadAssets

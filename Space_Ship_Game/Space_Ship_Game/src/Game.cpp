@@ -123,7 +123,7 @@ void Game::update(sf::Time t_deltaTime)
 	m_player.update(t_deltaTime, m_roombuilder);
 	for (Sweeper& sweeper :m_sweepers)
 	{
-		sweeper.update(m_roombuilder);
+		sweeper.update(m_roombuilder, m_player);
 	}
 }
 
