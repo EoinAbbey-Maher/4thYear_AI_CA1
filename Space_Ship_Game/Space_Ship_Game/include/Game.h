@@ -25,6 +25,8 @@ public: //Variables
 	std::vector<sf::Vector2f*> m_nestsPositions;
 	void setUpNests();
 
+	sf::Vector2i getNewPosition();
+
 	int noOfNests{ 2 };
 	const int NOOFSWEEPERS{ 6 };
 	
@@ -54,6 +56,8 @@ private: //Variables
 	sf::RectangleShape m_mapShape;
 
 	sf::Texture m_sweeperTexture;
+	std::vector<Sweeper> m_sweepers;
+
 
 	bool m_exitGame; // control exiting game
 };

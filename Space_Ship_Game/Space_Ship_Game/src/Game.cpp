@@ -3,11 +3,13 @@
 #include <iostream>
 
 Game::Game() :
-	m_window{ sf::VideoMode{ GlobalSettings::s_width, GlobalSettings::s_width, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ GlobalSettings::s_width, GlobalSettings::s_height, 32U }, "SFML Game" },
 	m_roombuilder{m_window},
 	m_exitGame{false} ,
 	m_player{m_window}
 {
+	srand(time(NULL));
+
 	m_roombuilder.loadFile("Assets\\Level.txt");
 	setUpNests();
 	setupSprite();
@@ -73,6 +75,12 @@ void Game::setUpNests()
 	}
 }
 
+sf::Vector2i Game::getNewPosition()
+{
+	sf::Vector2i NewPos = sf::Vector2i((rand() % m_roombuilder.M_TOTALWIDTH), (rand() % m_roombuilder.M_TOTALHEIGHT));
+	return NewPos;
+}
+
 void Game::processEvents()
 {
 	sf::Event newEvent;
@@ -113,6 +121,10 @@ void Game::update(sf::Time t_deltaTime)
 	m_playerView.setCenter(m_player.m_position);
 	m_playerCircle.setPosition(m_player.m_position);
 	m_player.update(t_deltaTime, m_roombuilder);
+	for (Sweeper& sweeper :m_sweepers)
+	{
+		sweeper.update(m_roombuilder);
+	}
 }
 
 void Game::render()
@@ -121,12 +133,20 @@ void Game::render()
 	m_window.setView(m_playerView);
 	m_roombuilder.render();
 	m_player.render();
+	for each (Sweeper sweeper in m_sweepers)
+	{
+		sweeper.render(m_window);
+	}
 
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
 	for (Nest* nest : m_nests)
 	{
 		nest->render(m_window);
+	}
+	for each (Sweeper sweeper in m_sweepers)
+	{
+		sweeper.render(m_window);
 	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
@@ -144,8 +164,19 @@ void Game::setupSprite()
 
 void Game::setupSweepers()
 {
-	for (int i )
+	for (int i = 0; i < NOOFSWEEPERS; i++)
 	{
-
+		m_sweepers.push_back(Sweeper());
+		sf::Vector2i newPos = getNewPosition();
+		while(m_roombuilder.m_tiles[newPos.x][newPos.y].m_type != TileType::FLOOR)
+		{
+			newPos = getNewPosition();
+			if (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type == TileType::FLOOR)
+			{
+				break;
+			}
+		}
+			newPos = sf::Vector2i(m_roombuilder.m_tiles[newPos.x][newPos.y].m_bodySquare.getPosition());
+			m_sweepers[i].init(&m_sweeperTexture, sf::Vector2f(newPos));
 	}
 }

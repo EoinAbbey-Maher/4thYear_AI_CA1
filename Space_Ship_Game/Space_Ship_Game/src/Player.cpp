@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "..\include\Player.h"
 
 Player::Player(sf::RenderWindow& t_window) :
 	m_window(t_window)
