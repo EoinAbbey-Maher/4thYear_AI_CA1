@@ -8,9 +8,14 @@ Game::Game() :
 	m_exitGame{false} ,
 	m_player{m_window}
 {
+	srand(time(NULL));
+
 	m_roombuilder.loadFile("Assets\\Level.txt");
-	setUpNests();
-	setupSprite();
+	if (m_nestTexture.loadFromFile("ASSETS\\IMAGES\\Nest.png"))
+	{
+		setUpNests();
+	}
+
 
 	m_playerView.setCenter(m_player.m_position);
 	m_playerView.setSize(150, 150);
@@ -60,13 +65,28 @@ void Game::run()
 
 void Game::setUpNests()
 {
-	m_nests.reserve(noOfNests);
-	m_nestsPositions.reserve(m_nests.capacity());
-	for (int i = 0; i < m_nests.capacity(); i++)
+
+	for (int i = 0; i < noOfNests; i++)
 	{
-		m_nests.push_back(new Nest(m_window));
-		m_nestsPositions.push_back(&m_nests[i]->getPosition());
+		m_nests.push_back(Nest());
+		sf::Vector2i newPos = getNewPosition();
+		while (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type != TileType::FLOOR)
+		{
+			newPos = getNewPosition();
+			if (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type == TileType::FLOOR)
+			{
+				break;
+			}
+		}
+		newPos = sf::Vector2i(m_roombuilder.m_tiles[newPos.x][newPos.y].m_bodySquare.getPosition());
+		m_nests[i].setBody(&m_nestTexture, sf::Vector2f(newPos));
 	}
+}
+
+sf::Vector2i Game::getNewPosition()
+{
+	sf::Vector2i NewPos = sf::Vector2i((rand() % m_roombuilder.M_TOTALWIDTH), (rand() % m_roombuilder.M_TOTALHEIGHT));
+	return NewPos;
 }
 
 void Game::processEvents()
@@ -102,11 +122,9 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	for (int i = 0; i < m_nests.size(); i++)
+	for (Nest& nest : m_nests)
 	{
-		m_nests[i]->checkPosition(m_roombuilder);
-		m_nests[i]->rotate();
-		
+		nest.update(m_roombuilder);
 	}
 	
 	m_playerView.setCenter(m_player.m_position);
@@ -120,26 +138,19 @@ void Game::render()
 	m_window.setView(m_playerView);
 	m_roombuilder.render();
 	m_player.render();
-	for (Nest* nest : m_nests)
+	for each(Nest nest in m_nests)
 	{
-		nest->render();
+		nest.render(m_window);
 	}
 	
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
-	for (Nest* nest : m_nests)
+	for each (Nest nest in m_nests)
 	{
-		nest->render();
+		nest.render(m_window);
 	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
 	m_window.display();
 }
 
-void Game::setupSprite()
-{
-	for (int i = 0; i < m_nests.size(); i++)
-	{
-		m_nests[i]->setBody();
-	}
-}
