@@ -1,28 +1,36 @@
 #include <SFML/Graphics.hpp>
+#include "Roombuilder.h"
 #include <iostream>
 #pragma once
 class Worker
 {
 public:
 	Worker();
-	void wander();
-	void move();
-	void render(sf::RenderWindow& t_window);
-	void setSprite();
+	~Worker() {};
+
 	
-	sf::Vector2f getPosition() { return m_workerPosition; }
+	void render(sf::RenderWindow& t_window);
+	void setBody(sf::Texture * t_texture,sf::Vector2f t_position);
+	void update(RoomBuilder& m_roombuilder);
+
+
 private:
+
+	void wander(RoomBuilder& m_roombuilder);
+	void checkCollisions(Roombuilder& t_roombuilder);
 	float const MAX_SPEED{ 4.0f };
 	float const PI{ 3.14159265358979323846 };
 	float m_randomDirection;
 	float m_rotation;
 	float m_maxRotation;
 	float m_magnitude;
-	sf::Vector2f m_workerVelocity;
+
+	sf::Vector2f m_size{ 10,10 };
+	sf::Vector2f m_workerVelocity{ -2.0f,0.0f };
 	sf::Vector2f m_workerPosition;
+	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_direction;
-	float random = (rand()%750);
-	sf::Texture m_WorkerTexture;
-	sf::Sprite m_WorkerSprite;
+
+	sf::RectangleShape m_workerShape;
 };
 

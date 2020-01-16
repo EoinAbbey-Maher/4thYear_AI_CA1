@@ -17,21 +17,17 @@ public:
 
 private:
 
-	std::vector<Worker*> m_workers;
-	std::vector<sf::Vector2f*> m_workersPositions;
+	std::vector<Worker> m_workers;
 	void setUpWorkers();
 	void processEvents();
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	
-	void setupFontAndText();
-	void setupSprite();
 
 	int noOfWorkers{ 5 };
 	sf::RenderWindow m_window; // main SFML window
-
+	sf::Texture m_workerTexture;
 	bool m_exitGame; // control exiting game
 
 };

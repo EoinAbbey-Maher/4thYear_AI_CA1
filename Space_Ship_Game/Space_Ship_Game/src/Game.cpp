@@ -7,8 +7,12 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
 	m_exitGame{false} //when true game will exit
 {
-	setUpWorkers();
-	setupSprite();
+	if (m_workerTexture.loadFromFile("ASSETS\\IMAGES\\Worker.png"))
+	{
+		setUpWorkers();
+	}
+	
+	
 }
 
 
@@ -43,12 +47,20 @@ void Game::run()
 
 void Game::setUpWorkers()
 {
-	m_workers.reserve(noOfWorkers);
-	m_workersPositions.reserve(m_workers.capacity());
-	for (int i = 0; i < m_workers.capacity(); i++)
+	for (int i = 0; i < noOfWorkers; i++)
 	{
-		m_workers.push_back(new Worker());
-		m_workersPositions.push_back(&m_workers[i]->getPosition());
+		m_workers.push_back(Worker());
+		sf::Vector2i newPos = getNewPosition();
+		while (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type != TileType::FLOOR)
+		{
+			newPos = getNewPosition();
+			if (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type == TileType::FLOOR)
+			{
+				break;
+			}
+		}
+		newPos = sf::Vector2i(m_roombuilder.m_tiles[newPos.x][newPos.y].m_bodySquare.getPosition());
+		m_workers[i].setBody(&m_workerTexture, sf::Vector2f(newPos));
 	}
 }
 
@@ -85,32 +97,22 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	for (int i = 0; i < m_workers.size(); i++)
+	for (Worker& worker : m_workers)
 	{
-		m_workers[i]->move();
-		m_workers[i]->wander();
+		worker.update(m_roombuilder);
 	}
+	
 }
 
 
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	for (Worker* worker : m_workers)
+	for each (Worker worker in m_workers)
 	{
-		worker->render(m_window);
+		worker.render(m_window);
 	}
 	m_window.display();
 }
 
-void Game::setupFontAndText()
-{
-}
 
-void Game::setupSprite()
-{
-	for (int i = 0; i < m_workers.size(); i++)
-	{
-		m_workers[i]->setSprite();
-	}
-}

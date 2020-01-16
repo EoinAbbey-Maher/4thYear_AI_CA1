@@ -2,17 +2,35 @@
 
 
 
-Worker::Worker(): 
-	m_workerVelocity{ -2.0f,0.0f },
-	m_randomDirection{ 0.0f },
-	m_rotation{ 0.0f },
-	m_maxRotation{ 0.0f },
-	m_magnitude{ 0.0f } 
-{
-	m_workerPosition = { random,random };
+Worker::Worker()
+{	
 }
 
-void Worker::wander()
+void Worker::render(sf::RenderWindow& t_window)
+{
+	t_window.draw(m_workerShape);
+}
+
+void Worker::setBody(sf::Texture* t_texture, sf::Vector2f t_position)
+{
+	m_workerPosition = t_position;
+	m_workerShape.setTexture(t_texture);
+	m_workerShape.setPosition(t_position);
+	m_workerShape.setSize(m_size);
+	m_workerShape.setOrigin(m_size.x * 2, m_size.y * 2);
+	
+}
+
+void Worker::update(RoomBuilder& m_roombuilder)
+{
+	m_lastPosition = m_workerPosition;
+	wander(m_roombuilder);
+	m_workerShape.setPosition(m_workerPosition);
+	
+}
+
+
+void Worker::wander(RoomBuilder& m_roombuilder)
 {
 	m_randomDirection = (rand() % 3) - 1;
 
@@ -29,35 +47,35 @@ void Worker::wander()
 	{
 		m_workerVelocity = m_direction * MAX_SPEED;
 	}
-	m_WorkerSprite.setRotation(m_rotation);
-	
-}
+	m_workerShape.setRotation(m_rotation);
 
-void Worker::move()
-{
 	if (m_magnitude > MAX_SPEED)
 	{
 		m_workerVelocity = m_direction * MAX_SPEED;
 	}
 
 	m_workerPosition = m_workerPosition + m_workerVelocity;
-	m_WorkerSprite.setPosition(m_workerPosition);
+	m_workerShape.setPosition(m_workerPosition);
+
+	checkCollisions(m_roombuilder);
 }
 
-void Worker::render(sf::RenderWindow& t_window)
-{
-	t_window.draw(m_WorkerSprite);
-}
 
-void Worker::setSprite()
+void Worker::checkCollisions(Roombuilder& t_roombuilder)
 {
-	if (!m_WorkerTexture.loadFromFile("ASSETS\\IMAGES\\worker.png"))
+	for each (Tile & tile in t_roombuilder.m_tiles)
 	{
-		std::cout << "problem loading worker" << std::endl;
+		if (m_workerShape.getGlobalBounds().intersects(tile.m_bodySquare.getGlobalBounds()) && tile.m_type == TileType::WALL)
+		{
+			m_workerPosition = m_lastPosition;
+			m_workerVelocity.x *= -1;
+			m_workerVelocity.y *= -1;
+		}
 	}
-	m_WorkerSprite.setTexture(m_WorkerTexture);
-	m_WorkerSprite.setOrigin(m_WorkerTexture.getSize().x / 2, m_WorkerTexture.getSize().y / 2);
-	
 }
+
+
+
+
 
 
