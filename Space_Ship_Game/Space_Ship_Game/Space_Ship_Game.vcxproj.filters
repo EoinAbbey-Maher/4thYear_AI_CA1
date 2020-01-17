@@ -12,6 +12,12 @@
     <ClCompile Include="src\Predator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ProjectilePool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ASSETS\IMAGES\SFML-LOGO.png">
+      <Filter>Resource Files\IMAGES</Filter>
+    </Image>
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Global.h" />
     <ClInclude Include="include\Missile.h" />
@@ -30,5 +36,34 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ASSETS\Level.txt" />
+    <ClInclude Include="include\ProjectilePool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ASSETS\IMAGES\SFML-LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ASSETS\FONTS\ariblk.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ASSETS\Level.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Worker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

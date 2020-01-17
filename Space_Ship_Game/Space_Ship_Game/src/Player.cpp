@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "..\include\Player.h"
 
 Player::Player(sf::RenderWindow& t_window) :
 	m_window(t_window)
@@ -14,7 +13,7 @@ Player::~Player()
 {
 }
 
-void Player::update(sf::Time t_td, RoomBuilder & t_rb)
+void Player::update(sf::Time t_td, RoomBuilder & t_rb, std::vector<Sweeper>& t_sweepers)
 {
 	m_lastPosition = m_position;
 	m_bodyShape.setPosition(m_position);
@@ -22,6 +21,15 @@ void Player::update(sf::Time t_td, RoomBuilder & t_rb)
 	m_bodyShape.setPosition(m_position);
 	checkBoundaries(t_rb);
 	
+	if (m_fireRequested && m_shootTimer > 0)
+	{
+		m_shootTimer -= t_td.asSeconds();
+	}
+	else
+	{
+		m_shootTimer = 1100;
+		m_fireRequested = false;
+	}
 }
 
 void Player::render()
@@ -48,6 +56,12 @@ void Player::processGameEvents(sf::Event t_e)
 	else if (sf::Keyboard::D == t_e.key.code)
 	{
 		turn(3);
+	}
+
+	
+	if (sf::Keyboard::Space == t_e.key.code)
+	{
+		requestfire();
 	}
 
 	if (m_bodyShape.getTexture() != &m_texure && !sf::Keyboard::W == t_e.key.code)
@@ -105,6 +119,17 @@ void Player::checkBoundaries(RoomBuilder& t_roombuilder)
 	}
 }
 
+void Player::requestfire()
+{
+	m_fireRequested = true;
+	if (m_shootTimer == s_TIME_BETWEEN_SHOTS)
+	{
+		sf::Vector2f tipOfShip(m_bodyShape.getPosition().x + 2.0f, m_bodyShape.getPosition().y);
+		tipOfShip.x += std::cos(RADIANSVAL * m_bodyShape.getRotation()) * ((m_bodyShape.getLocalBounds().top + m_bodyShape.getLocalBounds().height) * 1.7f);
+		tipOfShip.y += std::sin(RADIANSVAL * m_bodyShape.getRotation()) * ((m_bodyShape.getLocalBounds().top + m_bodyShape.getLocalBounds().height) * 1.7f);
+	}
+}
+
 void Player::setupBody()
 {
 	if (m_texure.loadFromFile("ASSETS\\IMAGES\\bluePlayerIdle.png"))
@@ -113,6 +138,8 @@ void Player::setupBody()
 		m_bodyShape.setTexture(&m_texure);
 	}
 	m_accelTexture.loadFromFile("ASSETS\\IMAGES\\bluePlayerGas.png");
+
+	m_bulletTexture.loadFromFile("ASSETS\\IMAGES\\bullet.png");
 
 	m_bodyShape.setRotation(m_orientation);
 	m_bodyShape.setPosition(m_position);

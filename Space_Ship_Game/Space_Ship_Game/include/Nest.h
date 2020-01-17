@@ -1,5 +1,7 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#ifndef NEST
+#define NEST
+
+
 #include "Missile.h"
 #include "Player.h"
 #include "Global.h"
@@ -36,3 +38,4 @@ private:
 	
 	
 };
+#endif //NEST

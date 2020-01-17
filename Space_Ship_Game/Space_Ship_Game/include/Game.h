@@ -4,12 +4,15 @@
 //SDKs
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <Nest.h>
+#include "Worker.h"
+
 
 //User Files
 #include "RoomBuilder.h"
 #include "Player.h"
 #include "Predator.h"
+#include <Nest.h>
+#include "Sweeper.h"
 
 class Game
 {
@@ -17,6 +20,9 @@ public:
 	Game();
 	~Game();
 	void run();
+	
+	
+	
 
 public: //Variables
 
@@ -27,6 +33,11 @@ public: //Variables
 
 	sf::Vector2i getNewPosition();
 
+	std::vector<Worker> m_workers;
+	void setUpWorkers();
+	
+	const int NOOFSWEEPERS{ 6 };
+	
 private: //Functions
 	void processEvents();
 	void processKeys(sf::Event t_event);
@@ -34,9 +45,19 @@ private: //Functions
 	void render();
 	
 	
-	RoomBuilder m_roombuilder;
+	
 	int noOfPredators{ 6 };
 	int noOfNests{ 2 };
+
+	int noOfWorkers{ 5 };
+	sf::RenderWindow m_window; // main SFML window
+	sf::Texture m_workerTexture;
+	bool m_exitGame; // control exiting game
+	void setupSprite();
+	RoomBuilder m_roombuilder;
+
+	void setupSweepers();
+
 
 private: //Variables
 
@@ -44,7 +65,6 @@ private: //Variables
 	
 	sf::View m_playerView;
 	sf::View m_miniMapView;
-	sf::RenderWindow m_window; // main SFML window
 
 	sf::CircleShape m_playerCircle{ 18 };
 
@@ -54,8 +74,8 @@ private: //Variables
 	sf::Texture m_nestTexture;
 	sf::Texture m_predatorTexture;
 	sf::Texture m_sweeperTexture;
+	std::vector<Sweeper> m_sweepers;
 
-	bool m_exitGame; // control exiting game
 
 };
 
