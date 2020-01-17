@@ -8,6 +8,8 @@ Game::Game() :
 	m_exitGame{false} ,
 	m_player{m_window}
 {
+	
+	
 	srand(time(NULL));
 
 	m_roombuilder.loadFile("Assets\\Level.txt");
@@ -33,7 +35,10 @@ Game::Game() :
 	m_playerCircle.setPosition(m_player.m_position);
 	m_playerCircle.setOrigin(m_playerCircle.getRadius(), m_playerCircle.getRadius());
 
-	
+	if (m_workerTexture.loadFromFile("ASSETS\\IMAGES\\worker.png"))
+	{
+		setUpWorkers();
+	}
 	if (m_sweeperTexture.loadFromFile("ASSETS\\IMAGES\\SweeperBot.png"))
 	{
 		setupSweepers();
@@ -45,7 +50,7 @@ Game::~Game()
 }
 
 void Game::run()
-{	
+{
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	const float fps{ 60.0f };
@@ -61,6 +66,28 @@ void Game::run()
 			update(timePerFrame); //60 fps
 		}
 		render(); // as many as possible
+	}
+}
+
+
+
+
+void Game::setUpWorkers()
+{
+	for (int i = 0; i < noOfWorkers; i++)
+	{
+		m_workers.push_back(Worker());
+		sf::Vector2i newPos = getNewPosition();
+		while (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type != TileType::FLOOR)
+		{
+			newPos = getNewPosition();
+			if (m_roombuilder.m_tiles[newPos.x][newPos.y].m_type == TileType::FLOOR)
+			{
+				break;
+			}
+		}
+		newPos = sf::Vector2i(m_roombuilder.m_tiles[newPos.x][newPos.y].m_bodySquare.getPosition());
+		m_workers[i].setBody(&m_workerTexture, sf::Vector2f(newPos));
 	}
 }
 
@@ -96,6 +123,7 @@ void Game::processEvents()
 
 		}
 	}
+	
 }
 
 void Game::processKeys(sf::Event t_event)
@@ -114,6 +142,11 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	for (Worker& worker : m_workers)
+	{
+		worker.update(m_roombuilder);
+	}
+	
 	for (int i = 0; i < m_nests.size(); i++)
 	{
 		m_nests[i]->rotate();
@@ -129,9 +162,15 @@ void Game::update(sf::Time t_deltaTime)
 
 void Game::render()
 {
+
 	m_window.clear(sf::Color::Black);
 	m_window.setView(m_playerView);
 	m_roombuilder.render();
+	for each (Worker worker in m_workers)
+	{
+		worker.render(m_window);
+	}
+
 	m_player.render();
 	for each (Sweeper sweeper in m_sweepers)
 	{
@@ -148,6 +187,11 @@ void Game::render()
 	{
 		sweeper.render(m_window);
 	}
+		for each (Worker worker in m_workers)
+	{
+		worker.render(m_window);
+	}
+
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);
 	
