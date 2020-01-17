@@ -1,5 +1,7 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#ifndef NEST
+#define NEST
+
+
 #include "Missile.h"
 
 class Nest {
@@ -24,3 +26,5 @@ private:
 	float m_lifeTotal;
 	bool m_missileFired;
 };
+
+#endif // !NEST

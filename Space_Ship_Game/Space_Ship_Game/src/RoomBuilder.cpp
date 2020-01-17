@@ -43,13 +43,10 @@ void RoomBuilder::loadFile(std::string t_roomName)
 				for (int j = 0; j < M_TOTALWIDTH; j++)
 				{
 					lvlfile >> m_tileValue[i][j];
-					std::cout << m_tileValue[i][j];
-
 
 					m_tiles[i][j].setTexture(TileType(m_tileValue[i][j]), j, i);
 					if (j == M_TOTALWIDTH - 1)
 					{
-						std::cout  << std::endl;
 					} //! if
 				
 				} // for j
@@ -89,7 +86,6 @@ void RoomBuilder::loadAssets()
 	if (floor2.loadFromFile("Assets\\IMAGES\\Floor2.png")) { std::cout << "loaded"; }
 	if (wall1.loadFromFile("Assets\\IMAGES\\wall1.png")) { std::cout << "loaded"; }
 	if (wall2.loadFromFile("Assets\\IMAGES\\wall2.png")) { std::cout << "loaded"; }
-	if (door1.loadFromFile("Assets\\IMAGES\\DoorClosed.png")) { std::cout << "loaded"; }
 	if (star.loadFromFile("Assets\\IMAGES\\star.png")) { std::cout << "loaded"; }
 
 } // !loadAssets

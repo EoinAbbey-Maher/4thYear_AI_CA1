@@ -38,6 +38,7 @@
     <ClInclude Include="include\Missile.h" />
     <ClInclude Include="include\Nest.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\ProjectilePool.h" />
     <ClInclude Include="include\RoomBuilder.h" />
     <ClInclude Include="include\Sweeper.h" />
     <ClInclude Include="include\Tile.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="src\Missile.cpp" />
     <ClCompile Include="src\Nest.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\ProjectilePool.cpp" />
     <ClCompile Include="src\RoomBuilder.cpp" />
     <ClCompile Include="src\Sweeper.cpp" />
     <ClCompile Include="src\Tile.cpp" />
