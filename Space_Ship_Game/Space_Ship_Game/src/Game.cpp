@@ -15,7 +15,10 @@ Game::Game() :
 	{
 		setUpNests();
 	}
-
+	if (m_predatorTexture.loadFromFile("ASSETS\\IMAGES\\predator.png"))
+	{
+		setUpPredators();
+	}
 
 	m_playerView.setCenter(m_player.m_position);
 	m_playerView.setSize(150, 150);
@@ -83,6 +86,24 @@ void Game::setUpNests()
 	}
 }
 
+void Game::setUpPredators()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		
+		m_predators.push_back(Predator());
+		int j = 0;
+		m_predators[i].setBody(&m_predatorTexture, m_nests[j].m_nestShape.getPosition());
+		
+	}
+	for (int i = 3; i < noOfPredators; i++)
+	{
+		m_predators.push_back(Predator());
+		int j = 1;
+		m_predators[i].setBody(&m_predatorTexture, m_nests[j].m_nestShape.getPosition());
+	}
+}
+
 sf::Vector2i Game::getNewPosition()
 {
 	sf::Vector2i NewPos = sf::Vector2i((rand() % m_roombuilder.M_TOTALWIDTH), (rand() % m_roombuilder.M_TOTALHEIGHT));
@@ -126,7 +147,10 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		nest.update(m_roombuilder);
 	}
-	
+	for (Predator& predator : m_predators)
+	{
+		predator.update(m_roombuilder,m_player.m_position);
+	}
 	m_playerView.setCenter(m_player.m_position);
 	m_playerCircle.setPosition(m_player.m_position);
 	m_player.update(t_deltaTime, m_roombuilder);
@@ -142,12 +166,20 @@ void Game::render()
 	{
 		nest.render(m_window);
 	}
+	for each (Predator predator in m_predators)
+	{
+		predator.render(m_window);
+	}
 	
 	m_window.setView(m_miniMapView);
 	m_roombuilder.render();
 	for each (Nest nest in m_nests)
 	{
 		nest.render(m_window);
+	}
+	for each (Predator predator in m_predators)
+	{
+		predator.render(m_window);
 	}
 	m_window.draw(m_playerCircle);
 	m_window.draw(m_mapShape);

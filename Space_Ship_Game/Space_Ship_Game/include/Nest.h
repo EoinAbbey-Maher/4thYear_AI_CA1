@@ -15,6 +15,8 @@ public: // functions
 	void setBody(sf::Texture * t_texture, sf::Vector2f t_position);
 	void update(RoomBuilder& m_roombuilder);
 
+	sf::RectangleShape m_nestShape;
+
 private:
 
 	void checkCollisions(RoomBuilder& t_roombuilder);
@@ -31,6 +33,6 @@ private:
 	float m_lifeTotal{ 4 };
 	bool m_missileFired{ false };
 
-	sf::RectangleShape m_nestShape;
+	
 	
 };

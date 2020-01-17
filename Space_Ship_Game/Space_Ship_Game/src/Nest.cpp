@@ -23,6 +23,10 @@ void Nest::update(RoomBuilder& m_roombuilder)
 	rotate();
 }
 
+void Nest::checkCollisions(RoomBuilder& t_roombuilder)
+{
+}
+
 void Nest::rotate()
 {
 	m_nestShape.rotate(rotateSpeed);

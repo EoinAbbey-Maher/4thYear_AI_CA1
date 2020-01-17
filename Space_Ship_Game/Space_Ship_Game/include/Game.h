@@ -9,6 +9,7 @@
 //User Files
 #include "RoomBuilder.h"
 #include "Player.h"
+#include "Predator.h"
 
 class Game
 {
@@ -20,9 +21,10 @@ public:
 public: //Variables
 
 	std::vector<Nest> m_nests;
-	std::vector<sf::Vector2f*> m_nestsPositions;
 	void setUpNests();
-	
+	std::vector<Predator> m_predators;
+	void setUpPredators();
+
 	sf::Vector2i getNewPosition();
 
 private: //Functions
@@ -33,7 +35,7 @@ private: //Functions
 	
 	
 	RoomBuilder m_roombuilder;
-
+	int noOfPredators{ 6 };
 	int noOfNests{ 2 };
 
 private: //Variables
@@ -50,6 +52,7 @@ private: //Variables
 	sf::RectangleShape m_mapShape;
 
 	sf::Texture m_nestTexture;
+	sf::Texture m_predatorTexture;
 	sf::Texture m_sweeperTexture;
 
 	bool m_exitGame; // control exiting game
