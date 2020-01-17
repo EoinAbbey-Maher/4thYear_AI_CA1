@@ -2,8 +2,10 @@
 #define ROOMBUILDER
 
 #include "Tile.h"
-
 #include <fstream>
+
+class Sweeper;
+class ProjectilePool;
 
 class RoomBuilder
 {

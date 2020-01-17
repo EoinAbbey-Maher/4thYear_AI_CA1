@@ -43,13 +43,10 @@ void RoomBuilder::loadFile(std::string t_roomName)
 				for (int j = 0; j < M_TOTALWIDTH; j++)
 				{
 					lvlfile >> m_tileValue[i][j];
-					std::cout << m_tileValue[i][j];
-
 
 					m_tiles[i][j].setTexture(TileType(m_tileValue[i][j]), j, i);
 					if (j == M_TOTALWIDTH - 1)
 					{
-						std::cout  << std::endl;
 					} //! if
 				
 				} // for j

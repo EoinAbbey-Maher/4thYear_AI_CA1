@@ -8,9 +8,7 @@
 
 //User Files
 #include <Nest.h>
-#include "RoomBuilder.h"
 #include "Sweeper.h"
-#include "Player.h"
 
 class Game
 {

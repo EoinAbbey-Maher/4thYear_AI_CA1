@@ -120,7 +120,7 @@ void Game::update(sf::Time t_deltaTime)
 	}
 	m_playerView.setCenter(m_player.m_position);
 	m_playerCircle.setPosition(m_player.m_position);
-	m_player.update(t_deltaTime, m_roombuilder);
+	m_player.update(t_deltaTime, m_roombuilder, m_sweepers);
 	for (Sweeper& sweeper :m_sweepers)
 	{
 		sweeper.update(m_roombuilder, m_player);

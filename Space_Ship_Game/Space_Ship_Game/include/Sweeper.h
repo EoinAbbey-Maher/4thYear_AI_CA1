@@ -6,6 +6,11 @@
 #include "Global.h"
 #include "RoomBuilder.h"
 #include "Player.h"
+#include "ProjectilePool.h"
+
+class Player;
+class ProjectilePool;
+class Missile;
 
 enum CurrentAction
 {
@@ -25,11 +30,10 @@ public: // functions
 	void update(RoomBuilder& m_room, Player& t_player);
 	void render(sf::RenderWindow & t_window);
 
-	
-
 public: // variables
 	
-
+	bool isDead{ false };
+	sf::RectangleShape m_body;
 
 private: // functions
 	void checkCollisions(RoomBuilder& t_builder);
@@ -62,7 +66,6 @@ private: // variables
 	float m_slowScalar;
 	float m_orientation{ 0 };
 
-	sf::RectangleShape m_body;
 	
 };
 
