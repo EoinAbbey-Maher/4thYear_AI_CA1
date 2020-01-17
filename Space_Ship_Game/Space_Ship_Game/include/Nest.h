@@ -3,28 +3,39 @@
 
 
 #include "Missile.h"
+#include "Player.h"
+#include "Global.h"
+#include "RoomBuilder.h"
+
 
 class Nest {
-public:
+public: // functions
 	Nest();
-	Missile m_missile;
+	~Nest() {};
 
-	void rotate();
-	void render(sf::RenderWindow& t_window);
-	void shootMissile(sf::RenderWindow& t_window);
-	void radiusCheck();
-	void deployPredators();
-	void setSprite();
-	
-	sf::Vector2f getPosition() { return m_nestPosition; }
+	void render(sf::RenderWindow & t_window);
+	void setBody(sf::Texture * t_texture, sf::Vector2f t_position);
+	void update(RoomBuilder& m_roombuilder);
+
+	sf::RectangleShape m_nestShape;
+
 private:
-	sf::Vector2f m_nestPosition;
-	sf::Texture m_nestTexture;
-	sf::Sprite m_nestSprite;
-	float random =  (rand() % 750 );
-	float rotateSpeed{ 0.9f };
-	float m_lifeTotal;
-	bool m_missileFired;
-};
 
-#endif // !NEST
+	void checkCollisions(RoomBuilder& t_roombuilder);
+	void rotate();
+	void radiusCheck();	
+	void shootMissile(sf::RenderWindow& t_window);
+	void deployPredators();
+
+	sf::Vector2f m_nestPosition;
+	sf::Vector2f m_size{50,50};
+
+	float m_random = rand() % GlobalSettings::s_width;
+	float rotateSpeed{ 0.9f };
+	float m_lifeTotal{ 4 };
+	bool m_missileFired{ false };
+
+	
+	
+};
+#endif //NEST

@@ -8,11 +8,27 @@ Missile::Missile() :
 	m_missileSprite.setPosition(m_missilePosition);
 }
 
-void Missile::seek()
+void Missile::seek(sf::Vector2f& t_playerPos)
 {
-	
+	m_target.x = t_playerPos.x - m_missilePosition.x;
+	m_target.y = t_playerPos.y - m_missilePosition.y;
 
+	m_distance = std::sqrt((m_target.x * m_target.x) + (m_target.y * m_target.y));
+	m_rotation = std::atan(m_target.y / m_target.x) * (180 / 3.14159265358979323846);
+
+	m_missileSprite.setRotation(m_rotation);
+	m_missileVelocity = (m_target / (m_distance * .2f));
 }
+
+
+
+void Missile::move()
+{
+	m_missileVelocity = m_target * s_MAX_SPEED;
+	m_missilePosition = m_missilePosition + m_missileVelocity;
+	m_missileSprite.setPosition(m_missilePosition);
+}
+
 
 void Missile::init(sf::Texture const & t_texture, sf::Vector2f t_position, float t_orientation)
 {

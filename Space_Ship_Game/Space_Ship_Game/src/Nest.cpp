@@ -1,32 +1,46 @@
 #include "..\include\Nest.h"
 
-Nest::Nest():
-	m_lifeTotal{ 4 },
-	m_missileFired{ false }
+Nest::Nest()
 {
-	m_nestPosition = { random,random };
-	m_nestSprite.setPosition(m_nestPosition);
-}
-
-void Nest::rotate()
-{
-	m_nestSprite.rotate(rotateSpeed);
 }
 
 void Nest::render(sf::RenderWindow& t_window)
 {
-	t_window.draw(m_nestSprite);
+	t_window.draw(m_nestShape);
 }
 
-void Nest::shootMissile(sf::RenderWindow& t_window)
+void Nest::setBody(sf::Texture* t_texture, sf::Vector2f t_position)
 {
-	
-	m_missile.render(t_window);
+	m_nestPosition = t_position;
+	m_nestShape.setTexture(t_texture);
+	m_nestShape.setPosition(t_position);
+	m_nestShape.setSize(m_size);
+	m_nestShape.setOrigin(m_size.x * .5, m_size.y* .5);
+}
+
+void Nest::update(RoomBuilder& m_roombuilder)
+{
+	rotate();
+}
+
+void Nest::checkCollisions(RoomBuilder& t_roombuilder)
+{
+}
+
+void Nest::rotate()
+{
+	m_nestShape.rotate(rotateSpeed);
 }
 
 void Nest::radiusCheck()
 {
-	m_missile.seek();
+	
+}
+
+
+void Nest::shootMissile(sf::RenderWindow& t_window)
+{
+	
 }
 
 void Nest::deployPredators()
@@ -34,13 +48,5 @@ void Nest::deployPredators()
 
 }
 
-void Nest::setSprite()
-{
-	if (!m_nestTexture.loadFromFile("ASSETS\\IMAGES\\nest.png"))
-	{
-		std::cout << "problem loading nest" << std::endl;
-	}
-	m_nestSprite.setTexture(m_nestTexture);
-	m_nestSprite.setOrigin(m_nestTexture.getSize().x / 2, m_nestTexture.getSize().y / 2);
 
-}
+

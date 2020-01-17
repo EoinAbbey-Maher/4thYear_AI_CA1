@@ -9,6 +9,9 @@
     <ClCompile Include="src\RoomBuilder.cpp" />
     <ClCompile Include="src\Sweeper.cpp" />
     <ClCompile Include="src\Tile.cpp" />
+    <ClCompile Include="src\Predator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\ProjectilePool.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -23,6 +26,16 @@
     <ClInclude Include="include\RoomBuilder.h" />
     <ClInclude Include="include\Sweeper.h" />
     <ClInclude Include="include\Tile.h" />
+    <ClInclude Include="include\Predator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ASSETS\IMAGES\SFML-LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ASSETS\FONTS\ariblk.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ASSETS\Level.txt" />
     <ClInclude Include="include\ProjectilePool.h" />
   </ItemGroup>
   <ItemGroup>
