@@ -1,7 +1,10 @@
+#ifndef WORKERS_H
+#define WORKERS_H
+
 #include <SFML/Graphics.hpp>
 #include "Roombuilder.h"
 #include <iostream>
-#pragma once
+
 class Worker
 {
 public:
@@ -17,7 +20,7 @@ public:
 private:
 
 	void wander(RoomBuilder& m_roombuilder);
-	void checkCollisions(Roombuilder& t_roombuilder);
+	void checkCollisions(RoomBuilder& t_roombuilder);
 	float const MAX_SPEED{ 4.0f };
 	float const PI{ 3.14159265358979323846 };
 	float m_randomDirection;
@@ -25,7 +28,7 @@ private:
 	float m_maxRotation;
 	float m_magnitude;
 
-	sf::Vector2f m_size{ 10,10 };
+	sf::Vector2f m_size{ 15,15 };
 	sf::Vector2f m_workerVelocity{ -2.0f,0.0f };
 	sf::Vector2f m_workerPosition;
 	sf::Vector2f m_lastPosition;
@@ -34,3 +37,4 @@ private:
 	sf::RectangleShape m_workerShape;
 };
 
+#endif // !WORKERS_H

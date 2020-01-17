@@ -17,7 +17,7 @@ void Worker::setBody(sf::Texture* t_texture, sf::Vector2f t_position)
 	m_workerShape.setTexture(t_texture);
 	m_workerShape.setPosition(t_position);
 	m_workerShape.setSize(m_size);
-	m_workerShape.setOrigin(m_size.x * 2, m_size.y * 2);
+	m_workerShape.setOrigin(m_size.x * .5, m_size.y * .5);
 	
 }
 
@@ -61,15 +61,15 @@ void Worker::wander(RoomBuilder& m_roombuilder)
 }
 
 
-void Worker::checkCollisions(Roombuilder& t_roombuilder)
+void Worker::checkCollisions(RoomBuilder& t_roombuilder)
 {
 	for each (Tile & tile in t_roombuilder.m_tiles)
 	{
 		if (m_workerShape.getGlobalBounds().intersects(tile.m_bodySquare.getGlobalBounds()) && tile.m_type == TileType::WALL)
 		{
 			m_workerPosition = m_lastPosition;
-			m_workerVelocity.x *= -1;
-			m_workerVelocity.y *= -1;
+			m_workerVelocity.x *= -.1;
+			m_workerVelocity.y *= -.1;
 		}
 	}
 }
